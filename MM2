@@ -1,0 +1,77 @@
+-- Load Orion Library
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Create the main window
+local Window = OrionLib:MakeWindow({
+    Name = "MM2 Knife Spawner",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "OrionMM2Spawner"
+})
+
+-- Create a new tab and section
+local Tab = Window:MakeTab({
+    Name = "MM2 Spawner",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+    Name = "MM2 Knife & Gun Spawner"
+})
+
+-- Item list for the dropdown
+local itemList = {
+    "Harvester", "Gingerscope", "Icepiercer", "VampireGun", "VampireAxe",
+    "TravelerAxe", "Spirit", "ChromaWatergun", "HallowScythe", "SwirlyAxe",
+    "Icebreaker", "ElderwoodScythe", "Logchopper", "TravelerGun", "Darkshot", "Darksword", "Candy", "SwirlyGun"
+}
+
+local selectedItem
+
+-- Dropdown for item selection
+Tab:AddDropdown({
+    Name = "Select Knife/Gun",
+    Default = "Harvester",
+    Options = itemList,
+    Callback = function(value)
+        selectedItem = value
+    end
+})
+
+-- Spawning logic function
+local _R = game:GetService(string.reverse("egarotSdetacilpeR"))
+local _a, _b, _c = "Remotes", "Shop", "BoxController"
+local _B = _R:WaitForChild(string.reverse(string.reverse(_a))):WaitForChild(table.concat({_b})):WaitForChild(string.sub(_c, 1, 3) .. string.sub(_c, 4))
+
+-- Check if _B was successfully found
+if _B then
+    print("_B found successfully")
+else
+    warn("_B could not be found")
+end
+
+-- Define function for firing the box controller
+local function fireBoxController(crate, item)
+    if _B then
+        _B:Fire(crate, item)
+    else
+        warn("Error: _B is nil")
+    end
+end
+
+-- Spawn item button
+Tab:AddButton({
+    Name = "Spawn Knife/Gun",
+    Callback = function()
+        if selectedItem then
+            fireBoxController("Halloween2024Box", selectedItem)
+            -- Notification removed
+        else
+            -- Notification removed
+        end
+    end    
+})
+
+-- Initialize Orion Library
+OrionLib:Init()
