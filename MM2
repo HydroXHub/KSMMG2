@@ -3,7 +3,7 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 
 -- Create the main window
 local Window = OrionLib:MakeWindow({
-    Name = "MM2 Knife Spawner",
+    Name = "MM2 Hub",
     HidePremium = false,
     SaveConfig = true,
     ConfigFolder = "OrionMM2Spawner"
@@ -11,8 +11,8 @@ local Window = OrionLib:MakeWindow({
 
 -- Create a new tab and section
 local Tab = Window:MakeTab({
-    Name = "MM2 Spawner",
-    Icon = "rbxassetid://4483345998",
+    Name = "Spawner",
+    Icon = "rbxassetid://7733674153",
     PremiumOnly = false
 })
 
@@ -72,6 +72,161 @@ Tab:AddButton({
         end
     end    
 })
+
+local Tab = Window:MakeTab({
+	Name = "Dupe",
+	Icon = "rbxassetid://7734034513",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Knife & Gun Dupe"
+})
+
+Tab:AddButton({
+	Name = "Start Knife & Gun Dupe!",
+	Callback = function()
+      		local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local UIPath
+
+if LocalPlayer.PlayerGui.MainGUI.Game:FindFirstChild("Inventory") ~= nil then
+    UIPath = LocalPlayer.PlayerGui.MainGUI.Game.Inventory.Main
+else
+    UIPath = LocalPlayer.PlayerGui.MainGUI.Lobby.Screens.Inventory.Main
+end
+
+local function VisualDupe()
+    for i,v in pairs(UIPath.Weapons.Items.Container:GetChildren()) do
+        for i,v in pairs(v.Container:GetChildren()) do
+            if v.Name == "Christmas" or v.Name == "Halloween" then
+                for i,v in pairs(v.Container:GetChildren()) do
+                    if v:IsA("Frame") then
+                        if v.ItemName.Label.Text ~= "Default Knife" and v.ItemName.Label.Text ~= "Default Gun" then
+                            local amount = v.Container.Amount.Text
+                            if amount == "" or amount == "None" then
+                                v.Container.Amount.Text = "x2"
+                            else
+                                local num = tonumber(amount:match("x(%d+)"))
+                                if num then
+                                    v.Container.Amount.Text = "x" .. tostring(num * 2)
+                                end
+                            end
+                        end
+                    end
+                end
+            else
+                if v:IsA("Frame") then
+                    if v.ItemName.Label.Text ~= "Default Knife" and v.ItemName.Label.Text ~= "Default Gun" then
+                        local amount = v.Container.Amount.Text
+                        if amount == "" or amount == "None" then
+                            v.Container.Amount.Text = "x2"
+                        else
+                            local num = tonumber(amount:match("x(%d+)"))
+                            if num then
+                                v.Container.Amount.Text = "x" .. tostring(num * 2)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    for i,v in pairs(UIPath.Pets.Items.Container.Current.Container:GetChildren()) do
+        if v:IsA("Frame") then
+            local amount = v.Container.Amount.Text
+            if amount == "" or amount == "None" then
+                v.Container.Amount.Text = "x2"
+            else
+                local num = tonumber(amount:match("x(%d+)"))
+                if num then
+                    v.Container.Amount.Text = "x" .. tostring(num * 2)
+                end
+            end
+        end
+    end
+end
+VisualDupe()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Auto Farm",
+	Icon = "rbxassetid://7743866529",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "XHub AutoFarm Script"
+})
+
+Tab:AddButton({
+	Name = "XHub AutoFarm",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/Au0yX/Community/main/XhubMM2"))()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Trade Scam",
+	Icon = "rbxassetid://7733770599",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Premium Trade Scam Script"
+})
+
+Tab:AddToggle({
+	Name = "Start Premium Trade Scam",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+	end    
+})
+
+Tab:AddButton({
+	Name = "Freeze Trade",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Lag Server",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Auto Put Godlies & Ancient",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Force Accept Trade",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Information",
+	Icon = "rbxassetid://7733964719",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "MM2 Hub Information"
+})
+
+Tab:AddParagraph("Why Does The Script Not Work?","If The Script Does Not Work, Please Wait For 1 Minute Until It Fully Loads!")
+
+Tab:AddParagraph("Am I Allowed To Share This Script?","Yes! Feel Free To Share This Script With Your Friends! This Script Will Forever Be Free To Use!")
 
 -- Initialize Orion Library
 OrionLib:Init()
